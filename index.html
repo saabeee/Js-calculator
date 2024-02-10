@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    
+    <div class="container">
+        <input type="text" class="display" id='result' placeholder="0">
+
+        <div class="buttons">
+            <button class="operator" value="AC" onClick="clearScreen()">AC</button>
+            <button class="operator" value="C" onClick="clearLast()">C</button>
+            <button class="operator" value="%" onClick="display('%')">%</button>
+            <button class="operator" value="/" onClick="display('/')">/</button>
+
+            <button value="7" onClick="display('7')">7</button>
+            <button value="8" onClick="display('8')">8</button>
+            <button value="9" onClick="display('9')">9</button>
+            <button class="operator" value="*" onClick="display('*')">*</button>
+
+            <button value="4" onClick="display('4')">4</button>
+            <button value="5" onClick="display('5')">5</button>
+            <button value="6" onClick="display('6')">6</button>
+            <button class="operator" value="-" onClick="display('-')">-</button>
+
+            <button value="1" onClick="display('1')">1</button>
+            <button value="2" onClick="display('2')">2</button>
+            <button value="3" onClick="display('3')">3</button>
+            <button class="operator" value="+" onClick="display('+')">+</button>
+
+            <button value="0" onClick="display('0')">0</button>
+            <button value="00" onClick="display('00')">00</button>
+            <button value="." onClick="display('.')">.</button>
+            <button class="operator" value="=" onClick="solve()">=</button>
+        </div>
+    </div>
+
+    <script>
+        function display(val) {
+            let resultField = document.getElementById('result');
+            if (resultField.value === '' && isNaN(val)) {
+                return;
+            }
+            resultField.value += val;
+        }
+
+        function solve() {
+            let x = document.getElementById('result').value;
+            if (x === '') {
+                return;
+            }
+            let y = eval(x);
+            if (isNaN(y) || !isFinite(y)) {
+                document.getElementById('result').value = "Error";
+            } else {
+                document.getElementById('result').value = y;
+            }
+        }
+
+
+        function clearScreen() {
+            document.getElementById('result').value = '';
+        }
+
+        function clearLast() {
+            let current = document.getElementById('result').value;
+            document.getElementById('result').value = current.slice(0, -1);
+        }
+    </script>
+</body>
+
+</html>
