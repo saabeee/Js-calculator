@@ -53,19 +53,26 @@
             }
             resultField.value += val;
         }
-
         function solve() {
-            let x = document.getElementById('result').value;
-            if (x === '') {
-                return;
-            }
-            let y = eval(x);
-            if (isNaN(y) || !isFinite(y)) {
-                document.getElementById('result').value = "Error";
-            } else {
-                document.getElementById('result').value = y;
-            }
+    let x = document.getElementById('result').value;
+    if (x === '') {
+        return;
+    }
+    if (x.includes('%')) {
+        let parts = x.split('%');
+        let num = parseFloat(parts[0]);
+        let secondNum = parts.length > 1 ? parseFloat(parts[1]) : 1;
+        let percentValue = num * (secondNum / 100);
+        document.getElementById('result').value = percentValue;
+    } else {
+        let y = eval(x);
+        if (isNaN(y) || !isFinite(y)) {
+            document.getElementById('result').value = "Error";
+        } else {
+            document.getElementById('result').value = y;
         }
+    }
+}
 
 
         function clearScreen() {
